@@ -1,70 +1,58 @@
 #include "monty.h"
+
 /**
- * div_monty -  divides the second top element and second top
- * @stack:Pointer To The Head
- * @line_number: Line Number
- */
-void div_monty(stack_t **stack, unsigned int line_number)
+* f_pop - function that prints the top of the stack
+* @head: double head pointer to the stack
+* @counter: line count
+*
+* Return: nothing
+*/
+void f_pop(stack_t **head, unsigned int counter)
 {
-	stack_t *head = *stack;
-	int check, sum = 0;
-	stack_t *top1, *top2;
-	(void)line_number;
+	stack_t *h;
 
-	check = dlistint_len(head);
-	if (check < 2)
-		handle_error(11);
-	top1 = head;
-	top2 = head->next;
-	if (top1->n == 0)
-		handle_error(12);
-
-	sum = top2->n / top1->n;
-	(*stack)->n = sum;
-	delete_dnodeint_at_index(stack, 1);
+	if (*head == NULL)
+	{
+		fprintf(stderr, "L%d: can't pop an empty stack\n", counter);
+		fclose(bus.file);
+		free(bus.content);
+		free_stack(*head);
+		exit(EXIT_FAILURE);
+	}
+	h = *head;
+	*head = h->next;
+	free(h);
 }
-/**
- * mul_monty -  multiplies the second top element and top element
- * @stack:Pointer To The Head
- * @line_number: Line Number
- */
-void mul_monty(stack_t **stack, unsigned int line_number)
-{
-		stack_t *head = *stack;
-	int check, sum = 0;
-	stack_t *top1, *top2;
-	(void)line_number;
 
-	check = dlistint_len(head);
-	if (check < 2)
-		handle_error(13);
-	top1 = head;
-	top2 = head->next;
-	sum = top2->n * top1->n;
-	(*stack)->n = sum;
-	delete_dnodeint_at_index(stack, 1);
+/**
+* f_pint - function that prints the top of the stack
+* @head: double head pointer to the stack
+* @counter: line count
+*
+* Return: nothing
+*/
+void f_pint(stack_t **head, unsigned int counter)
+{
+	if (*head == NULL)
+	{
+		fprintf(stderr, "L%u: can't pint, stack empty\n", counter);
+		fclose(bus.file);
+		free(bus.content);
+		free_stack(*head);
+		exit(EXIT_FAILURE);
+	}
+	printf("%d\n", (*head)->n);
 }
+
 /**
- * mod_monty -  mod the second top element and top element
- * @stack:Pointer To The Head
- * @line_number: Line Number
- */
-void mod_monty(stack_t **stack, unsigned int line_number)
+* f_nop - function that does nothing
+* @head: double head pointer to the stack
+* @counter: line count
+*
+* Return: nothing
+*/
+void f_nop(stack_t **head, unsigned int counter)
 {
-	stack_t *head = *stack;
-	int check, sum = 0;
-	stack_t *top1, *top2;
-	(void)line_number;
-
-	check = dlistint_len(head);
-	if (check < 2)
-		handle_error(14);
-	top1 = head;
-	top2 = head->next;
-	if (top1->n == 0)
-		handle_error(12);
-
-	sum = top2->n % top1->n;
-	(*stack)->n = sum;
-	delete_dnodeint_at_index(stack, 1);
+	(void) counter;
+	(void) head;
 }

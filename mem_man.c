@@ -1,29 +1,34 @@
 #include "monty.h"
-/**
- * free_info - free data
- *
- *
- */
-void free_info(void)
-{
-	free(info.cmd);
-	info.cmd = NULL;
-	free(info.arg);
-	info.arg = NULL;
-	fclose(info.fp);
-}
-/**
- * free_list - free list
- * @stack: stack or queue
- */
-void free_list(stack_t *stack)
-{
-	stack_t *node;
 
-	while (stack)
+/**
+* free_stack - function that frees a doubly linked list
+* @head: head pointer to the stack
+*
+* Return: nothing
+*/
+void free_stack(stack_t *head)
+{
+	stack_t *temp;
+
+	temp = head;
+	while (head)
 	{
-		node = stack;
-		stack = stack->next;
-		free(node);
+		temp = head->next;
+		free(head);
+		head = temp;
 	}
+}
+
+/**
+* f_stack - function that prints the top
+* @head: head of stack
+* @counter: line count
+*
+* Return: nothing
+*/
+void f_stack(stack_t **head, unsigned int counter)
+{
+	(void)head;
+	(void)counter;
+	bus.lifi = 0;
 }
